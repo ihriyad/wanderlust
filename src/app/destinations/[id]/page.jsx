@@ -16,12 +16,13 @@ const DestinationDetailsPage = async ({ params }) => {
 
   return (
     <section className="mx-auto max-w-4xl my-4">
-      <h3 className="flex">Destination Details:</h3>
+      <h3>Destination Details:</h3>
+
+      <DestinationDetails destination={destination}></DestinationDetails>
       <div className="flex items-center justify-end gap-3 my-3">
         <EditDesModal destination={destination}></EditDesModal>
         <DeleteDesModal destination={destination}></DeleteDesModal>
       </div>
-      <DestinationDetails destination={destination}></DestinationDetails>
     </section>
   );
 };

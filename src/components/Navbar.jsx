@@ -9,7 +9,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data: session, isPending, error, refetch } = authClient.useSession();
   const user = session?.user;
-  console.log(user, "user form nav");
+  // console.log(user, "user form nav");
 
   if (isPending) return <p>Loading...</p>;
 const handleSignOut = async()=>{
