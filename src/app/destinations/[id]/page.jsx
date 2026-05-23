@@ -1,32 +1,21 @@
-import Image from "next/image";
+import DestinationDetails from "@/components/DestinationDetails";
+import EditDesModal from "@/components/modals/EditDesModal";
+
 import React from "react";
 
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const res = await fetch(`http://localhost:5000/destinations/${id}`);
-  
+  const res = await fetch(`http://localhost:5000/destinations/${id}`,{cache: "no-store"});
+
   const destination = await res.json();
-  console.log("destination details", destination);
-  const { description, destinationName, price, imageUrl, country, duration } =
-    destination;
+  // console.log("destination details", destination);
+
   return (
     <section className="mx-auto max-w-4xl my-4">
-      <h3>Destination Details:</h3>
-      <div>
-        <figure>
-          <Image
-            src={imageUrl}
-            alt="details image"
-            height={400}
-            width={500}
-          ></Image>
-        </figure>
-        <h2>{destinationName}</h2>
-        <p>${price}</p>
-        <p className="font-bold text-3xl">OverView</p>
-        <h3>{description}</h3>
-      </div>
+      <h3 className="flex">Destination Details:</h3>
+      <EditDesModal destination={destination}></EditDesModal>
+      <DestinationDetails destination={destination}></DestinationDetails>
     </section>
   );
 };
