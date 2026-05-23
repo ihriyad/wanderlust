@@ -12,7 +12,9 @@ const Navbar = () => {
   console.log(user, "user form nav");
 
   if (isPending) return <p>Loading...</p>;
-
+const handleSignOut = async()=>{
+  await authClient.signOut()
+}
   return (
     <nav className="sticky top-0 z-40 w-full bg-amber-50 border-b border-separator">
       <header className="flex h-16 items-center justify-between px-6">
@@ -70,11 +72,15 @@ const Navbar = () => {
           {user ? (
             <>
               <Avatar>
-                <Avatar.Image alt={`${user?.name}'s Photo`} src={user?.image} />
+                <Avatar.Image
+                  referrerPolicy="no-referrer"
+                  alt={`${user?.name}'s Photo`}
+                  src={user?.image}
+                />
                 <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
               </Avatar>
               <li>
-                <Button variant="secondary">SignOut</Button>
+                <Button onClick={handleSignOut} variant="secondary">SignOut</Button>
               </li>
             </>
           ) : (

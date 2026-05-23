@@ -7,10 +7,12 @@ import {
   FieldError,
   Input,
   Label,
+  Separator,
   TextField,
 } from "@heroui/react";
 import { redirect } from "next/navigation";
 import React from "react";
+import { FcGoogle } from "react-icons/fc";
 
 const SignUpPage = () => {
   const onSubmit = async (e) => {
@@ -28,11 +30,16 @@ const SignUpPage = () => {
     });
     if (data) {
       alert("SignUp Success");
-      redirect("/")
+      redirect("/");
     }
     if (error) {
       alert("sign Up failed");
     }
+  };
+  const handleGoogleSignin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
   };
   return (
     <div>
@@ -101,6 +108,21 @@ const SignUpPage = () => {
             </Button>
           </div>
         </form>
+        <div className="flex items-center gap-2">
+          <Separator className="flex-1" />
+
+          <p className="text-sm text-gray-500">OR register with</p>
+
+          <Separator className="flex-1" />
+        </div>
+        <Button
+          onClick={handleGoogleSignin}
+          variant="outline"
+          className={"w-full items-center flex"}
+        >
+          <FcGoogle />
+          Continue With Google
+        </Button>
       </Card>
     </div>
   );
