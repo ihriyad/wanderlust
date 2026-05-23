@@ -3,8 +3,15 @@ import React from "react";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import { Avatar, Button } from "@heroui/react";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session, isPending, error, refetch } = authClient.useSession();
+  const user = session?.user;
+  console.log(user, "user form nav");
+
+  if (isPending) return <p>Loading...</p>;
 
   return (
     <nav className="sticky top-0 z-40 w-full bg-amber-50 border-b border-separator">
@@ -59,22 +66,36 @@ const Navbar = () => {
             ></Image>
           </div>
         </div>
-        <ul className="flex  gap-2 p-4">
-          <li>
-            <Link href={"/profile"} className="block py-2">
-              Profile
-            </Link>
-          </li>
-          <li>
-            <Link href={"/login"} className="block py-2">
-              Login
-            </Link>
-          </li>
-          <li>
-            <Link href={"/signup"} className="block py-2">
-              SignUp
-            </Link>
-          </li>
+        <ul className="flex gap-2 p-4">
+          {user ? (
+            <>
+              <Avatar>
+                <Avatar.Image alt={`${user?.name}'s Photo`} src={user?.image} />
+                <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
+              </Avatar>
+              <li>
+                <Button variant="secondary">SignOut</Button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link href={"/profile"} className="block py-2">
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <Link href={"/login"} className="block py-2">
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link href={"/signUp"} className="block py-2">
+                  SignUp
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </header>
       {isMenuOpen && (
