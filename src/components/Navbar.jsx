@@ -11,13 +11,13 @@ const Navbar = () => {
       <header className="flex h-16 items-center justify-between px-6">
         <ul className="hidden items-center gap-4 md:flex">
           <li>
-            <Link href="/">Home</Link>
+            <Link href={"/"}>Home</Link>
           </li>
           <li>
-            <Link href="/destinations">Destinations</Link>
+            <Link href={"/add-destination"}>Add Destinations</Link>
           </li>
           <li>
-            <Link href="/my-bookings">My Bookings</Link>
+            <Link href={"/destinations"}>Destinations</Link>
           </li>
         </ul>
         <div className="flex items-center gap-4">
