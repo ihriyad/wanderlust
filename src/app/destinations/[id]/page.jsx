@@ -1,14 +1,22 @@
 import DestinationDetails from "@/components/DestinationDetails";
 import { DeleteDesModal } from "@/components/modals/DeleteDesModal";
 import EditDesModal from "@/components/modals/EditDesModal";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 import React from "react";
 
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
 
-  const res = await fetch(`http://localhost:5000/destinations/${id}`, {
-    cache: "no-store",
+  // console.log(token);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SEVER_URL}/destinations/${id}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
   });
 
   const destination = await res.json();

@@ -10,7 +10,7 @@ const MyBookingPage = async () => {
   //   console.log(session);
   const user = session?.user;
   console.log(user);
-  const res = await fetch(`http://localhost:5000/bookings/${user.id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SEVER_URL}/bookings/${user.id}`);
   const data = await res.json();
   //   console.log(data, "data form my-bookings page");
   return (

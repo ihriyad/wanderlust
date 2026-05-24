@@ -24,7 +24,7 @@ const DesBookingCard = ({ destination }) => {
       departureDate: new Date(date),
     };
     // console.log("bookings data", bookingsData);
-    const res = await fetch("http://localhost:5000/bookings", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SEVER_URL}/bookings`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

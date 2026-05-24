@@ -7,7 +7,7 @@ export function DeleteDesModal({ destination }) {
   const { destinationName, _id } = destination;
 
   const handleDelete = async () => {
-    const res = await fetch(`http://localhost:5000/destinations/${_id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SEVER_URL}/destinations/${_id}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",

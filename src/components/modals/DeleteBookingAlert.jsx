@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 export function DeleteBookingAlert({ id }) {
   const handleCancelBooking = async () => {
-    const res = await fetch(`http://localhost:5000/bookings/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SEVER_URL}/bookings/${id}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
